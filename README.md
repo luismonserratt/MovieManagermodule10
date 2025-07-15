@@ -1,74 +1,90 @@
-======================================================
-             Movie Manager - Java + MySQL + Swing
-======================================================
+# 🎬 Movie Manager (Java + MySQL)
 
-Author: Luis Augusto Monserratt Alvarado  
-Date: July 2025  
-Project: Module 10 - Movie Manager with Database Integration  
+A desktop-based Movie Manager application built using **Java Swing** and **MySQL**. This app allows users to manage a collection of movies with features like adding, updating, deleting, and viewing movies, as well as calculating the average duration.
 
-------------------------------------------------------
-Description:
-------------------------------------------------------
-This application is a simple Java Swing GUI program for managing a movie database using MySQL.  
-It allows the user to:
+---
 
+## 📦 Features
+
+- Connect to a local MySQL database
 - View all movies in the database
-- Add a new movie
-- Update an existing movie
-- Delete a movie
-- Calculate and display the average duration of all movies
-- Test MySQL connection
+- Add new movies
+- Update existing movie details
+- Delete movies by title
+- Display average movie duration
 
-------------------------------------------------------
+---
+
+## 🛠️ Technologies Used
+
+- Java 17+
+- Java Swing (GUI)
+- MySQL 8.0+
+- JDBC (MySQL Connector/J)
+- IntelliJ IDEA
+
+---
+
+## 🧱 Database Setup
+
+1. **Create the Database and Table**
+
+Login to MySQL and execute:
+
+```sql
+CREATE DATABASE IF NOT EXISTS movie_manager;
+USE movie_manager;
+
+CREATE TABLE IF NOT EXISTS movies (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    genre VARCHAR(50),
+    year INT,
+    rating DOUBLE,
+    duration INT,
+    watched BOOLEAN
+);
+
+-- Insert sample data
+INSERT INTO movies (title, genre, year, rating, duration, watched) VALUES
+('Inception', 'Sci-Fi', 2010, 8.8, 148, true),
+('Titanic', 'Romance', 1997, 7.8, 195, true),
+('Interstellar', 'Sci-Fi', 2014, 8.6, 169, true),
+('Shrek', 'Comedy', 2001, 7.9, 90, true),
+('The Godfather', 'Crime', 1972, 9.2, 175, true),
+('Toy Story', 'Animation', 1995, 8.3, 81, true),
+('Coco', 'Animation', 2017, 8.4, 105, true),
+('Joker', 'Drama', 2019, 8.5, 122, true),
+('Iron Man', 'Action', 2008, 7.9, 126, true),
+('Frozen', 'Animation', 2013, 7.4, 102, true);
+
+Update Connection Info
+
+Make sure the DatabaseManager.java file contains your correct database settings:
+
+private static final String URL = "jdbc:mysql://localhost:3306/movie_manager";
+private static final String USER = "root";
+private static final String PASSWORD = "your_password";
+
+How to Run
+Open the project in IntelliJ IDEA.
+
+Make sure MySQL is running.
+
+Install mysql-connector-j if it's not already included (check your lib or Maven dependencies).
+
+Run MovieManagerGUI.java as a Java application.
+
 Project Structure:
-------------------------------------------------------
-src/com/luismonserratt/moviemanager/
-├── Movie.java                  → Represents a movie object  
-├── MovieDAO.java              → Handles all database operations (CRUD + AVG)  
-├── DatabaseManager.java       → Manages MySQL connection settings  
-├── MovieManagerGUI.java       → Main GUI class (start here)  
-├── MySQLConnectionTest.java   → Optional class to test DB connection  
 
-sql/
-├── movie_manager.sql          → SQL script to create the database, table, and insert sample data
+src/
+└── com.luismonserratt.moviemanager/
+    ├── Movie.java
+    ├── MovieDAO.java
+    ├── MovieManagerGUI.java
+    ├── DatabaseManager.java
+    └── MySQLConnectionTest.java
 
-lib/
-├── mysql-connector-j-8.x.x.jar → MySQL JDBC driver (required)
-
-------------------------------------------------------
-How to Run:
-------------------------------------------------------
-1. Make sure MySQL is installed and running on your machine.
-
-2. Open a MySQL terminal and execute the SQL script:
-   > USE movie_manager;  
-   > Run the contents of `movie_manager.sql` to create the table and insert sample data.
-
-3. Open the project in IntelliJ IDEA or your preferred Java IDE.
-
-4. Add the MySQL connector JAR file to your project's libraries:
-   - Go to Project Structure → Modules → Dependencies
-   - Click `+` → JARs or directories → Select the `mysql-connector-j-8.x.x.jar`
-
-5. Open and run `MovieManagerGUI.java`.
-
-------------------------------------------------------
-MySQL Configuration:
-------------------------------------------------------
-Default configuration is located in `DatabaseManager.java`:
-
-URL: `jdbc:mysql://localhost:3306/movie_manager`  
-User: `root`  
-Password: `Luis123!`  
-
-You can modify these credentials if needed.
-
-------------------------------------------------------
-Note:
-------------------------------------------------------
-- Make sure to have the MySQL JDBC driver in your classpath.
-- This project is designed to demonstrate basic database interaction with Java and Swing.
-
-------------------------------------------------------
-Enjoy using the Movie Manager!
-======================================================
+Author
+Luis Augusto Monserratt Alvarado
+GitHub: @luismonserratt
